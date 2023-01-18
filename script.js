@@ -1,4 +1,4 @@
-var lowerCasedCharacters = [
+var lowerCasedAlpha = [
   'a',
   'b',
   'c',
@@ -26,7 +26,7 @@ var lowerCasedCharacters = [
   'y',
   'z',
 ];
-var upperCasedCharacters = [
+var upperCaseAlpha = [
   'A',
   'B',
   'C',
@@ -79,7 +79,8 @@ var specialCharacters = [
   '_',
   '.',
 ];
-var numericCharacters = [
+
+var numbers = [
   '0',
   '1',
   '2',
@@ -90,3 +91,36 @@ var numericCharacters = [
   '7',
   '8',
   '9',
+];
+
+var passwordTxt = document.getElementById("password");
+var length = document.getElementById("length");
+var incNumbers = document.getElementById("numbers");
+var incSymbols = document.getElementById("symbols");
+var generateBtn = document.getElementById("generate");
+var generatePassword = document.getElementById("generatePassword")
+
+generateBtn.addEventListener("click", () => {
+  let characters = alpha;
+  incNumbers.checked ? (characters += numbers) : "";
+  incSymbols.checked ? (characters += symbols) : "";
+  passwordTxt.value = generatePassword(length.value, characters);
+}); 
+
+generatePassword = (length, characters) => {
+  let password = "";
+  for (let i = 0; i < length; i++) {
+    password += characters.charAt(
+      Math.floor(Math.random() * characters.length)
+    );
+  }
+  return password;
+};
+
+copyBtn = document.getElementById("copy");
+copyBtn.addEventListener("click", () => {
+passwordTxt.select();
+document.execCommand("copy");
+alert("Password Copied");
+});
+
